@@ -39,3 +39,40 @@ while True:
 # schedule.every().monday.do(job)
 # schedule.every().wednesday.at("13:15").do(job)
 # schedule.every().minute.at(":17").do(job)
+
+
+
+from apscheduler.schedulers.blocking import BlockingScheduler
+from datetime import datetime
+# 输出时间
+def job():
+    print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+# BlockingScheduler
+sched = BlockingScheduler()
+# 触发器参数1 date 固定的时间 只执行一次
+sched.add_job(job, 'date', run_date = '2023-08-23 15:30:05')
+# 触发器参数2 interval 间隔时间 间隔多长时间执行一次 参数weeks (int) –  间隔几周 days (int) –  间隔几天  hours (int) –  间隔几小时
+# minutes (int) –  间隔几分钟  seconds (int)
+sched.add_job(job, 'interval',  days = 1, seconds=5, start_date='2023-08-22 15:44:05',end_date='2023-08-25 15:42:05')
+# 触发器参数3 cron 确切的时间周期 day of week 可以是0-6或者星期缩写mon、tur等
+# (datetime | str) 表示参数既可以是datetime类型，也可以是str类型
+# year (int|str) – 4-digit year -（表示四位数的年份，如2008年）
+# month (int|str) – month (1-12) -（表示取值范围为1-12月）
+# day (int|str) – day of the (1-31) -（表示取值范围为1-31日）
+# week (int|str) – ISO week (1-53) -（格里历2006年12月31日可以写成2006年-W52-7（扩展形式）或2006W527（紧凑形式））
+# day_of_week (int|str) – number or name of weekday (0-6 or mon,tue,wed,thu,fri,sat,sun) – （表示一周中的第几天，既可以用0-6表示也可以用其英语缩写表示）
+# hour (int|str) – hour (0-23) – （表示取值范围为0-23时）
+# minute (int|str) – minute (0-59) – （表示取值范围为0-59分）
+# second (int|str) – second (0-59) – （表示取值范围为0-59秒）
+# start_date (datetime|str) – earliest possible date/time to trigger on (inclusive) – （表示开始时间）
+# end_date (datetime|str) – latest possible date/time to trigger on (inclusive) – （表示结束时间）
+sched.add_job(job, 'cron', month = '8-12',day_of_week='wed',hour='16',minute='35')
+sched.start()
+
+
+
+
+
+
+
+
