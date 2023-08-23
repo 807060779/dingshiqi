@@ -18,3 +18,24 @@ python data1.py
 把刚才那个bat文件放到’程序或脚本‘下，这里需要注意，bat文件的位置要跟py文件的位置在同一个文件夹下。添加参数
 与上面的链接的位置一样，起始于 到data.py的前一个文件夹的位置 比如 c/user/data.py 现在就是c/user/
 最后设置触发器 就是什么时候触发即完成。
+
+
+
+3.基于python自带shcedule模块 
+import schedule
+import ceshi
+import time
+# def job():
+#     print("我正在工作  Starting")
+# schedule.every(5).to(10).seconds.do(ceshi.job)  另一个文件的函数 每隔5-10s钟执行一次脚本
+schedule.every().wednesday.at("10:17").do(ceshi.job)  每周三的10点17分执行脚本
+while True:
+    schedule.run_pending()  想一直运行 必须得有while true 自循环 run_pending 运行待处理的
+# schedule.every(10).seconds.do(job)
+# schedule.every(10).minutes.do(job)
+# schedule.every().hour.do(job)
+# schedule.every().day.at("10:30").do(job)
+# schedule.every(5).to(10).minutes.do(job)
+# schedule.every().monday.do(job)
+# schedule.every().wednesday.at("13:15").do(job)
+# schedule.every().minute.at(":17").do(job)
